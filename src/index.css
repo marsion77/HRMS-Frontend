@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* Override Tailwind v4 default font-sans so all font-sans utility classes use Poppins */
+@theme {
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    @apply bg-slate-50 text-slate-900 antialiased;
+  }
+}
+
+/* Minimalist Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #0f172a;
+  border: 2px solid #f1f5f9;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Sharp high-contrast styling utilities */
+.flat-border {
+  border: 2px solid #0f172a;
+}
+
+.flat-card {
+  background-color: #ffffff;
+  border: 2px solid #0f172a;
+  box-shadow: 4px 4px 0px 0px #0f172a;
+}
+
+.flat-card-hover {
+  @apply transition-all duration-150;
+}
+.flat-card-hover:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0px 0px #0f172a;
+}
+
+.flat-button {
+  background-color: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  border: 2px solid #0f172a;
+  border-radius: 0px;
+  transition: all 0.15s ease-in-out;
+}
+.flat-button:hover {
+  background-color: #ffffff;
+  color: #0f172a;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px 0px #0f172a;
+}
+.flat-button:active {
+  transform: translate(0px, 0px);
+  box-shadow: none;
+}
+
+.flat-button-secondary {
+  background-color: #ffffff;
+  color: #0f172a;
+  font-weight: 700;
+  border: 2px solid #0f172a;
+  border-radius: 0px;
+  transition: all 0.15s ease-in-out;
+}
+.flat-button-secondary:hover {
+  background-color: #f1f5f9;
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0px 0px #0f172a;
+}
+.flat-button-secondary:active {
+  transform: translate(0px, 0px);
+  box-shadow: none;
+}
+
+.flat-input {
+  border: 2px solid #0f172a;
+  border-radius: 0px;
+  padding: 10px 14px;
+  color: #0f172a;
+  font-family: inherit;
+  transition: all 0.1s ease-in-out;
+}
+.flat-input:focus {
+  outline: none;
+  background-color: #f8fafc;
+  box-shadow: 2px 2px 0px 0px #0f172a;
+}
