@@ -4,6 +4,12 @@
 /* Override Tailwind v4 default font-sans so all font-sans utility classes use Poppins */
 @theme {
   --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-900: #1e3a8a;
 }
 
 @layer base {
@@ -13,88 +19,106 @@
   }
 }
 
-/* Minimalist Custom Scrollbar */
+/* Softer Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0f172a;
-  border: 2px solid #f1f5f9;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #94a3b8;
 }
 
-/* Sharp high-contrast styling utilities */
+/* Zoho-like modern styling utilities */
 .flat-border {
-  border: 2px solid #0f172a;
+  border: 1px solid #e2e8f0;
 }
 
 .flat-card {
   background-color: #ffffff;
-  border: 2px solid #0f172a;
-  box-shadow: 4px 4px 0px 0px #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .flat-card-hover {
-  @apply transition-all duration-150;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .flat-card-hover:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 8px 8px 0px 0px #0f172a;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
 }
 
 .flat-button {
-  background-color: #0f172a;
+  background-color: #2563eb;
   color: #ffffff;
-  font-weight: 700;
-  border: 2px solid #0f172a;
-  border-radius: 0px;
-  transition: all 0.15s ease-in-out;
+  font-weight: 600;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .flat-button:hover {
-  background-color: #ffffff;
-  color: #0f172a;
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px 0px #0f172a;
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
 }
 .flat-button:active {
-  transform: translate(0px, 0px);
+  transform: translateY(0px);
   box-shadow: none;
 }
 
 .flat-button-secondary {
   background-color: #ffffff;
-  color: #0f172a;
-  font-weight: 700;
-  border: 2px solid #0f172a;
-  border-radius: 0px;
-  transition: all 0.15s ease-in-out;
+  color: #334155;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 .flat-button-secondary:hover {
-  background-color: #f1f5f9;
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0px 0px #0f172a;
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
 }
 .flat-button-secondary:active {
-  transform: translate(0px, 0px);
-  box-shadow: none;
+  background-color: #f1f5f9;
 }
 
 .flat-input {
-  border: 2px solid #0f172a;
-  border-radius: 0px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
   padding: 10px 14px;
   color: #0f172a;
+  background-color: #ffffff;
   font-family: inherit;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .flat-input:focus {
   outline: none;
-  background-color: #f8fafc;
-  box-shadow: 2px 2px 0px 0px #0f172a;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  background-color: #ffffff;
+}
+
+/* Glassmorphism panel for header / sidebar active links */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(241, 245, 249, 0.8);
 }

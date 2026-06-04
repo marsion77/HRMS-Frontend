@@ -55,18 +55,18 @@ const SuperAdminDashboard = () => {
   };
 
   return (
-    <div className="space-y-8 max-w-6xl">
+    <div className="space-y-6 max-w-6xl font-sans">
       {/* Page Header */}
-      <div className="flex justify-between items-center flex-wrap gap-4">
+      <div className="flex justify-between items-center flex-wrap gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm shadow-slate-100/50">
         <div>
-          <h1 className="text-3xl font-black uppercase text-slate-900 tracking-tight">HR Profiles Directory</h1>
-          <p className="text-sm font-semibold text-slate-500 mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">HR Profiles Directory</h1>
+          <p className="text-sm text-slate-500 mt-1">
             Create, invite, and track HR administrator accounts.
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="flat-button px-6 py-3 uppercase tracking-widest text-sm"
+          className="flat-button px-5 py-2.5 text-sm font-semibold rounded-lg shadow-sm"
         >
           + Invite HR
         </button>
@@ -74,58 +74,59 @@ const SuperAdminDashboard = () => {
 
       {/* Global message notifications */}
       {message.text && (
-        <div className={`border-2 p-4 font-bold text-sm rounded-none ${
+        <div className={`border p-4 rounded-xl text-sm font-medium transition-all ${
           message.type === 'success' 
-            ? 'bg-green-50 border-green-500 text-green-900' 
-            : 'bg-red-50 border-red-500 text-red-900'
+            ? 'bg-emerald-50 border-emerald-200 text-emerald-800' 
+            : 'bg-rose-50 border-rose-200 text-rose-800'
         }`}>
           {message.text}
         </div>
       )}
 
       {/* HR Records Grid */}
-      <div className="flat-card bg-white p-0 overflow-hidden">
-        <div className="p-4 border-b-2 border-slate-900 bg-slate-100 flex justify-between items-center">
-          <span className="font-extrabold uppercase text-xs tracking-wider text-slate-700">HR Administators</span>
-          <span className="bg-slate-900 text-white text-xs font-black px-2 py-0.5 border border-slate-900">
+      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-150 bg-slate-50/50 flex justify-between items-center">
+          <span className="font-semibold text-sm text-slate-700">HR Administrators</span>
+          <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full border border-blue-100">
             Total Count: {hrs.length}
           </span>
         </div>
 
         {loading ? (
-          <div className="p-12 text-center text-slate-500 font-bold uppercase tracking-wider">
-            Fetching HR accounts...
+          <div className="p-16 text-center text-slate-400 font-medium tracking-wide">
+            <div className="animate-pulse">Fetching HR accounts...</div>
           </div>
         ) : hrs.length === 0 ? (
-          <div className="p-12 text-center text-slate-500 font-medium">
+          <div className="p-16 text-center text-slate-400 font-medium">
             No HR accounts found. Click "+ Invite HR" to register one.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b-2 border-slate-900 text-xs font-black uppercase tracking-wider text-slate-700 bg-slate-50">
-                  <th className="p-4">Name</th>
+                <tr className="border-b border-slate-200 text-xs font-semibold uppercase tracking-wider text-slate-500 bg-slate-50/70">
+                  <th className="p-4 pl-6">Name</th>
                   <th className="p-4">Email</th>
                   <th className="p-4">Status</th>
-                  <th className="p-4">Created At</th>
+                  <th className="p-4 pr-6">Created At</th>
                 </tr>
               </thead>
-              <tbody className="divide-y-2 divide-slate-100">
+              <tbody className="divide-y divide-slate-100">
                 {hrs.map((hr) => (
-                  <tr key={hr._id} className="hover:bg-slate-50 transition-colors">
-                    <td className="p-4 font-bold text-slate-900">{hr.name}</td>
-                    <td className="p-4 text-slate-600 font-medium">{hr.email}</td>
+                  <tr key={hr._id} className="hover:bg-slate-50/50 transition-colors">
+                    <td className="p-4 pl-6 font-semibold text-slate-900">{hr.name}</td>
+                    <td className="p-4 text-slate-600 text-sm font-medium">{hr.email}</td>
                     <td className="p-4">
-                      <span className={`inline-block px-2.5 py-1 text-xs font-bold uppercase tracking-widest border-2 ${
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${
                         hr.status === 'Active'
-                          ? 'bg-green-100 border-green-700 text-green-800'
-                          : 'bg-yellow-100 border-yellow-700 text-yellow-800'
+                          ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                          : 'bg-amber-50 border-amber-200 text-amber-700'
                       }`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${hr.status === 'Active' ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
                         {hr.status}
                       </span>
                     </td>
-                    <td className="p-4 text-slate-500 font-semibold text-xs">
+                    <td className="p-4 pr-6 text-slate-500 text-xs font-medium">
                       {new Date(hr.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
                     </td>
                   </tr>
@@ -138,13 +139,23 @@ const SuperAdminDashboard = () => {
 
       {/* Invite HR Modal Dialog */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <div className="max-w-md w-full flat-card bg-white p-8 relative">
-            <h2 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-6">Invite HR Administrator</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm transition-opacity">
+          <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-2xl border border-slate-100 relative">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold tracking-tight text-slate-900">Invite HR Administrator</h2>
+              <button 
+                onClick={() => setShowModal(false)}
+                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
             
-            <form onSubmit={handleInviteHR} className="space-y-6">
+            <form onSubmit={handleInviteHR} className="space-y-5">
               <div>
-                <label className="block text-xs uppercase font-black tracking-wider text-slate-700 mb-2">
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                   Full Name
                 </label>
                 <input
@@ -152,13 +163,13 @@ const SuperAdminDashboard = () => {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full flat-input"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-slate-800"
                   placeholder="e.g. Sarah Jenkins"
                 />
               </div>
 
               <div>
-                <label className="block text-xs uppercase font-black tracking-wider text-slate-700 mb-2">
+                <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                   Email Address
                 </label>
                 <input
@@ -166,25 +177,25 @@ const SuperAdminDashboard = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full flat-input"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-slate-800"
                   placeholder="e.g. sarah.jenkins@sap.com"
                 />
               </div>
 
-              <div className="flex gap-4 pt-4 border-t border-slate-200">
+              <div className="flex gap-3 pt-4 border-t border-slate-100 mt-6">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="flex-1 flat-button-secondary py-2.5 uppercase tracking-wider text-xs"
+                  className="flex-1 px-4 py-2.5 border border-slate-200 text-slate-600 font-semibold rounded-lg hover:bg-slate-50 transition-colors text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitLoading}
-                  className="flex-1 flat-button py-2.5 uppercase tracking-wider text-xs disabled:opacity-50"
+                  className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors text-sm disabled:opacity-50"
                 >
-                  {submitLoading ? 'Sending Invitation...' : 'Send Invitation'}
+                  {submitLoading ? 'Sending...' : 'Send Invitation'}
                 </button>
               </div>
             </form>

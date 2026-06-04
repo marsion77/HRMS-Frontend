@@ -42,22 +42,30 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 font-sans">
-      <div className="max-w-md w-full flat-card bg-white p-8">
+    <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4 font-sans relative overflow-hidden">
+      {/* Decorative background blurs */}
+      <div className="absolute -top-10 -left-10 w-72 h-72 sm:w-96 sm:h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
+      <div className="absolute -bottom-10 -right-10 w-72 h-72 sm:w-96 sm:h-96 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none"></div>
+
+      <div className="max-w-md w-full bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-2xl shadow-2xl border border-slate-100 z-10">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-black uppercase tracking-tight text-slate-900">SAP HRMS</h1>
-          <p className="text-xs uppercase font-extrabold tracking-widest text-slate-400 mt-1">Enterprise Console</p>
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600 text-white font-extrabold text-2xl shadow-lg shadow-blue-500/20 mb-4">S</div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Welcome to SAP HRMS</h1>
+          <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Enterprise Sign In</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border-2 border-red-500 text-red-900 font-bold p-3 text-sm mb-6">
-            {error}
+          <div className="bg-rose-50 border border-rose-200 text-rose-800 font-medium p-3.5 rounded-xl text-sm mb-6 flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-rose-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-xs uppercase font-black tracking-wider text-slate-700 mb-2">
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
               Email Address
             </label>
             <input
@@ -65,13 +73,13 @@ const Login = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full flat-input"
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-150 text-slate-800"
               placeholder="e.g. employee@sap.com"
             />
           </div>
 
           <div>
-            <label className="block text-xs uppercase font-black tracking-wider text-slate-700 mb-2">
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
               Password
             </label>
             <div className="relative">
@@ -80,13 +88,13 @@ const Login = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full flat-input pr-12"
-                placeholder="••••••••"
+                className="w-full px-4 py-3 pr-12 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-150 text-slate-800"
+                placeholder="Enter password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1"
                 tabIndex={-1}
               >
                 <EyeIcon visible={showPassword} />
@@ -97,14 +105,14 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flat-button py-3 text-sm uppercase tracking-widest disabled:opacity-50"
+            className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:transform-none disabled:shadow-none cursor-pointer"
           >
             {loading ? 'Authenticating...' : 'Sign In'}
           </button>
         </form>
 
-        <div className="mt-8 border-t-2 border-slate-900 pt-6 text-center text-xs font-semibold text-slate-500 uppercase tracking-widest">
-          SAP HRMS v1.0.0
+        <div className="mt-8 border-t border-slate-100 pt-6 text-center text-xs font-medium text-slate-400 tracking-wider">
+          SAP HRMS Version 1.0.0
         </div>
       </div>
     </div>

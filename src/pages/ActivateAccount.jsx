@@ -77,9 +77,18 @@ const ActivateAccount = () => {
 
   if (verifying) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="text-xl font-extrabold uppercase tracking-widest text-slate-900 border-4 border-slate-900 p-6 bg-white shadow-[4px_4px_0px_0px_#0f172a]">
-          Verifying activation link...
+      <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4 font-sans relative overflow-hidden">
+        <div className="absolute -top-10 -left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none animate-pulse"></div>
+        <div className="max-w-md w-full bg-white/95 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-slate-100 text-center z-10">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4">
+              <svg className="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            <p className="text-slate-700 font-semibold tracking-wide text-base">Verifying activation link...</p>
+          </div>
         </div>
       </div>
     );
@@ -87,59 +96,85 @@ const ActivateAccount = () => {
 
   if (tokenError) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
-        <div className="max-w-md w-full flat-card bg-white p-8 text-center">
-          <h1 className="text-2xl font-black text-red-600 uppercase tracking-tight mb-4">Activation Failed</h1>
-          <p className="text-slate-600 mb-6 font-semibold">{tokenError}</p>
-          <button onClick={() => navigate('/login')} className="flat-button py-2 px-6">Go to Login</button>
+      <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4 font-sans relative overflow-hidden">
+        <div className="absolute -top-10 -left-10 w-72 h-72 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 pointer-events-none"></div>
+        <div className="max-w-md w-full bg-white/95 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-slate-100 text-center z-10">
+          <div className="w-14 h-14 rounded-full bg-rose-50 text-rose-500 border border-rose-100 flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h1 className="text-xl font-bold text-slate-800 tracking-tight mb-2">Activation Link Expired</h1>
+          <p className="text-slate-500 mb-6 text-sm font-medium">{tokenError}</p>
+          <button 
+            onClick={() => navigate('/login')} 
+            className="w-full py-2.5 bg-slate-850 hover:bg-slate-900 text-white font-semibold rounded-xl transition-all text-sm shadow-md cursor-pointer"
+          >
+            Go to Login
+          </button>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 font-sans">
-      <div className="max-w-md w-full flat-card bg-white p-8">
+    <div className="min-h-screen flex items-center justify-center bg-slate-950 p-4 font-sans relative overflow-hidden">
+      {/* Decorative background blurs */}
+      <div className="absolute -top-10 -left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none animate-pulse"></div>
+      <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 pointer-events-none animate-pulse"></div>
+
+      <div className="max-w-md w-full bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-2xl shadow-2xl border border-slate-100 z-10 animate-fade-in">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-black uppercase tracking-tight text-slate-900">Activate Account</h1>
-          <p className="text-sm font-semibold text-slate-500 mt-1">
-            Setting up profile for <strong className="text-slate-900">{invitedUser?.name}</strong> as <strong className="text-slate-900">{invitedUser?.role}</strong>
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600 text-white font-extrabold text-2xl shadow-lg shadow-blue-500/20 mb-4">S</div>
+          <h1 className="text-xl font-bold tracking-tight text-slate-900">Activate Your Account</h1>
+          <p className="text-xs font-semibold text-slate-500 mt-2 tracking-wide leading-relaxed">
+            Setting up profile for <span className="text-slate-800 font-bold">{invitedUser?.name}</span> as <span className="text-slate-800 font-bold">{invitedUser?.role}</span>
           </p>
         </div>
 
         {error && (
-          <div className="bg-red-50 border-2 border-red-500 text-red-900 font-bold p-3 text-sm mb-6">{error}</div>
+          <div className="bg-rose-50 border border-rose-200 text-rose-800 font-medium p-3.5 rounded-xl text-sm mb-6 flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-rose-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>{error}</span>
+          </div>
         )}
         {success && (
-          <div className="bg-green-50 border-2 border-green-500 text-green-900 font-bold p-3 text-sm mb-6">{success}</div>
+          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium p-3.5 rounded-xl text-sm mb-6 flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{success}</span>
+          </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs uppercase font-black tracking-wider text-slate-700 mb-2">Email Address</label>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email Address</label>
             <input
               type="text"
               disabled
               value={invitedUser?.email}
-              className="w-full flat-input bg-slate-100 cursor-not-allowed opacity-70"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-105 cursor-not-allowed opacity-60 text-slate-600 text-sm font-medium"
             />
           </div>
 
           <div>
-            <label className="block text-xs uppercase font-black tracking-wider text-slate-700 mb-2">New Password</label>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">New Password</label>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full flat-input pr-12"
+                className="w-full px-4 py-2.5 pr-12 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-slate-800 text-sm"
                 placeholder="Min. 6 characters"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1"
                 tabIndex={-1}
               >
                 <EyeIcon visible={showPassword} />
@@ -148,20 +183,20 @@ const ActivateAccount = () => {
           </div>
 
           <div>
-            <label className="block text-xs uppercase font-black tracking-wider text-slate-700 mb-2">Confirm Password</label>
+            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Confirm Password</label>
             <div className="relative">
               <input
                 type={showConfirm ? 'text' : 'password'}
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full flat-input pr-12"
+                className="w-full px-4 py-2.5 pr-12 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-slate-800 text-sm"
                 placeholder="Repeat password"
               />
               <button
                 type="button"
                 onClick={() => setShowConfirm(!showConfirm)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors p-1"
                 tabIndex={-1}
               >
                 <EyeIcon visible={showConfirm} />
@@ -172,7 +207,7 @@ const ActivateAccount = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flat-button py-3 text-sm uppercase tracking-widest disabled:opacity-50"
+            className="w-full py-3.5 mt-2 bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:transform-none disabled:shadow-none cursor-pointer text-sm"
           >
             {loading ? 'Activating Account...' : 'Activate Profile'}
           </button>

@@ -58,28 +58,32 @@ const HRLeaves = () => {
   });
 
   return (
-    <div className="space-y-8 max-w-6xl font-sans">
+    <div className="space-y-6 max-w-6xl font-sans">
       {/* Sub-header options */}
-      <div className="flex justify-between items-center flex-wrap gap-4">
+      <div className="flex justify-between items-center flex-wrap gap-4 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm shadow-slate-100/50">
         <div>
-          <h1 className="text-3xl font-black uppercase text-slate-900 tracking-tight">Leave Desk</h1>
-          <p className="text-sm font-semibold text-slate-500 mt-1">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Leave Desk</h1>
+          <p className="text-sm text-slate-500 mt-1">
             Review incoming employee leave requests and track approval histories.
           </p>
         </div>
-        <div className="flex border-2 border-slate-900">
+        <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200/50">
           <button
             onClick={() => setFilterStatus('Pending')}
-            className={`px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-100 ${
-              filterStatus === 'Pending' ? 'bg-slate-900 text-white' : 'bg-white text-slate-900 hover:bg-slate-100'
+            className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition-all duration-150 cursor-pointer ${
+              filterStatus === 'Pending' 
+                ? 'bg-white text-slate-800 shadow-sm' 
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             Pending ({leaves.filter(l => l.status === 'Pending').length})
           </button>
           <button
             onClick={() => setFilterStatus('History')}
-            className={`px-4 py-2 text-xs font-black uppercase tracking-wider transition-all duration-100 ${
-              filterStatus === 'History' ? 'bg-slate-900 text-white' : 'bg-white text-slate-900 hover:bg-slate-100'
+            className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition-all duration-150 cursor-pointer ${
+              filterStatus === 'History' 
+                ? 'bg-white text-slate-800 shadow-sm' 
+                : 'text-slate-500 hover:text-slate-900'
             }`}
           >
             History ({leaves.filter(l => l.status !== 'Pending').length})
@@ -89,29 +93,29 @@ const HRLeaves = () => {
 
       {/* Messaging Panel */}
       {message.text && (
-        <div className={`border-2 p-4 font-bold text-sm rounded-none ${
+        <div className={`border p-4 rounded-xl text-sm font-medium transition-all ${
           message.type === 'success' 
-            ? 'bg-green-50 border-green-500 text-green-900' 
-            : 'bg-red-50 border-red-500 text-red-900'
+            ? 'bg-emerald-50 border-emerald-200 text-emerald-800' 
+            : 'bg-rose-50 border-rose-200 text-rose-800'
         }`}>
           {message.text}
         </div>
       )}
 
       {/* Main Grid View */}
-      <div className="flat-card bg-white p-0 overflow-hidden">
-        <div className="p-4 border-b-2 border-slate-900 bg-slate-100 flex justify-between items-center">
-          <span className="font-extrabold uppercase text-xs tracking-wider text-slate-700">
+      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-150 bg-slate-50/50 flex justify-between items-center">
+          <span className="font-semibold text-sm text-slate-700">
             {filterStatus === 'Pending' ? 'Active Applications' : 'Archived Requests'}
           </span>
         </div>
 
         {loading ? (
-          <div className="p-12 text-center text-slate-500 font-bold uppercase tracking-wider">
-            Fetching leave documents...
+          <div className="p-16 text-center text-slate-400 font-medium tracking-wide">
+            <div className="animate-pulse">Fetching leave documents...</div>
           </div>
         ) : filteredLeaves.length === 0 ? (
-          <div className="p-12 text-center text-slate-500 font-medium">
+          <div className="p-16 text-center text-slate-400 font-medium">
             {filterStatus === 'Pending' 
               ? 'No pending leave applications at this time.' 
               : 'Leave history is empty.'}
@@ -120,19 +124,19 @@ const HRLeaves = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b-2 border-slate-900 text-xs font-black uppercase tracking-wider text-slate-700 bg-slate-50">
-                  <th className="p-4">Employee</th>
+                <tr className="border-b border-slate-200 text-xs font-semibold uppercase tracking-wider text-slate-500 bg-slate-50/70">
+                  <th className="p-4 pl-6">Employee</th>
                   <th className="p-4">Leave Context</th>
                   <th className="p-4">Duration</th>
                   <th className="p-4">Reason</th>
                   {filterStatus === 'Pending' ? (
-                    <th className="p-4 text-center">Decisions</th>
+                    <th className="p-4 text-center pr-6">Decisions</th>
                   ) : (
-                    <th className="p-4">Resolution</th>
+                    <th className="p-4 pr-6">Resolution</th>
                   )}
                 </tr>
               </thead>
-              <tbody className="divide-y-2 divide-slate-100">
+              <tbody className="divide-y divide-slate-100">
                 {filteredLeaves.map((leave) => {
                   const days = calculateDays(leave.startDate, leave.endDate);
                   const available = leave.userId 
@@ -140,54 +144,57 @@ const HRLeaves = () => {
                     : 0;
 
                   return (
-                    <tr key={leave._id} className="hover:bg-slate-50 transition-colors">
-                      <td className="p-4">
-                        <p className="font-bold text-slate-900">{leave.userId?.name || 'Unknown'}</p>
-                        <p className="text-slate-500 text-xs font-semibold">{leave.userId?.email || ''}</p>
+                    <tr key={leave._id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="p-4 pl-6">
+                        <p className="font-semibold text-slate-900">{leave.userId?.name || 'Unknown'}</p>
+                        <p className="text-slate-500 text-xs font-medium">{leave.userId?.email || ''}</p>
                       </td>
                       <td className="p-4">
-                        <span className="inline-block px-2 py-0.5 text-xs font-black uppercase tracking-wider bg-slate-200 border border-slate-400 text-slate-800 mb-1.5 font-bold">
+                        <span className="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold capitalize bg-slate-150/75 text-slate-700 border border-slate-200 rounded-full mb-1.5">
                           {leave.leaveType}
                         </span>
                         {filterStatus === 'Pending' && (
-                          <p className="text-xs text-slate-500 font-semibold">
-                            Balance: <strong className="text-slate-900">{available} days</strong> left
+                          <p className="text-xs text-slate-400 font-medium">
+                            Balance: <strong className="text-slate-700 font-semibold">{available} days</strong> left
                           </p>
                         )}
                       </td>
                       <td className="p-4">
-                        <p className="font-bold text-slate-900 text-sm">{days} {days === 1 ? 'day' : 'days'}</p>
-                        <p className="text-xs font-semibold text-slate-500">
+                        <p className="font-semibold text-slate-900 text-sm">{days} {days === 1 ? 'day' : 'days'}</p>
+                        <p className="text-xs font-medium text-slate-400">
                           {new Date(leave.startDate).toLocaleDateString()} - {new Date(leave.endDate).toLocaleDateString()}
                         </p>
                       </td>
-                      <td className="p-4 text-slate-600 font-semibold text-sm max-w-xs truncate" title={leave.reason}>
+                      <td className="p-4 text-slate-500 font-medium text-sm max-w-xs truncate" title={leave.reason}>
                         {leave.reason}
                       </td>
                       {filterStatus === 'Pending' ? (
-                        <td className="p-4">
+                        <td className="p-4 pr-6">
                           <div className="flex gap-2 justify-center">
                             <button
                               onClick={() => handleAction(leave._id, 'Approved')}
-                              className="flat-button py-1 px-3 text-xs uppercase tracking-wider bg-green-700 border-green-700 text-white hover:bg-white hover:text-green-700 hover:shadow-[4px_4px_0px_0px_rgba(21,128,61,1)]"
+                              className="px-3.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-semibold hover:bg-emerald-100 transition-colors cursor-pointer"
                             >
                               Approve
                             </button>
                             <button
                               onClick={() => handleAction(leave._id, 'Rejected')}
-                              className="flat-button py-1 px-3 text-xs uppercase tracking-wider bg-red-700 border-red-700 text-white hover:bg-white hover:text-red-700 hover:shadow-[4px_4px_0px_0px_rgba(185,28,28,1)]"
+                              className="px-3.5 py-1.5 bg-rose-50 text-rose-700 border border-rose-200 rounded-lg text-xs font-semibold hover:bg-rose-100 transition-colors cursor-pointer"
                             >
                               Reject
                             </button>
                           </div>
                         </td>
                       ) : (
-                        <td className="p-4">
-                          <span className={`inline-block px-2.5 py-1 text-xs font-bold uppercase tracking-widest border-2 ${
+                        <td className="p-4 pr-6">
+                          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${
                             leave.status === 'Approved'
-                              ? 'bg-green-100 border-green-700 text-green-800'
-                              : 'bg-red-100 border-red-700 text-red-800'
+                              ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                              : 'bg-rose-50 border-rose-200 text-rose-700'
                           }`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${
+                              leave.status === 'Approved' ? 'bg-emerald-500' : 'bg-rose-500'
+                            }`}></span>
                             {leave.status}
                           </span>
                         </td>
