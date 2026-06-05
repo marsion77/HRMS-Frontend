@@ -178,7 +178,7 @@ const SuperAdminDashboard = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-slate-800"
-                  placeholder="e.g. sarah.jenkins@sap.com"
+                  placeholder="e.g. sarah.jenkins@apex-hrms.com"
                 />
               </div>
 

@@ -76,8 +76,8 @@ const Layout = () => {
       <div className="p-6 border-b border-slate-800 bg-slate-950 flex justify-between items-center">
         <div>
           <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-            <span className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-extrabold text-base shadow-md shadow-blue-500/20">S</span>
-            <span>SAP HRMS</span>
+            <span className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-extrabold text-base shadow-md shadow-blue-500/20">A</span>
+            <span>Apex HRMS</span>
           </h1>
           <p className="text-[10px] uppercase font-extrabold tracking-widest text-slate-500 mt-0.5">Enterprise Suite</p>
         </div>

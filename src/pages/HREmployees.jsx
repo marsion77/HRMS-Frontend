@@ -276,7 +276,7 @@ const HREmployees = () => {
                   value={inviteEmail}
                   onChange={(e) => setInviteEmail(e.target.value)}
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-slate-800 text-sm"
-                  placeholder="e.g. jason@sap.com"
+                  placeholder="e.g. jason@apex-hrms.com"
                 />
               </div>
 

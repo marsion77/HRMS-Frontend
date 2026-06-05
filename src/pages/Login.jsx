@@ -49,8 +49,8 @@ const Login = () => {
 
       <div className="max-w-md w-full bg-white/95 backdrop-blur-md p-8 sm:p-10 rounded-2xl shadow-2xl border border-slate-100 z-10">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600 text-white font-extrabold text-2xl shadow-lg shadow-blue-500/20 mb-4">S</div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Welcome to SAP HRMS</h1>
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-600 text-white font-extrabold text-2xl shadow-lg shadow-blue-500/20 mb-4">A</div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900">Welcome to Apex HRMS</h1>
           <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-widest">Enterprise Sign In</p>
         </div>
 
@@ -74,7 +74,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-150 text-slate-800"
-              placeholder="e.g. employee@sap.com"
+              placeholder="e.g. employee@apex-hrms.com"
             />
           </div>
 
@@ -112,7 +112,7 @@ const Login = () => {
         </form>
 
         <div className="mt-8 border-t border-slate-100 pt-6 text-center text-xs font-medium text-slate-400 tracking-wider">
-          SAP HRMS Version 1.0.0
+          Apex HRMS Version 1.0.0
         </div>
       </div>
     </div>
