@@ -23,7 +23,10 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error fetching current user profile:', error.message);
-      logout();
+      // Only logout if it's an explicit authentication error, not a generic network timeout
+      if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+        logout();
+      }
     } finally {
       setLoading(false);
     }
