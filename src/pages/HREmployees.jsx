@@ -138,7 +138,7 @@ const HREmployees = () => {
 
       {/* Message Box */}
       {message.text && (
-        <div className={`border p-4 rounded-xl text-sm font-medium transition-all ${
+        <div className={`fixed top-6 right-6 z-[100] border p-4 rounded-xl text-sm font-medium transition-all shadow-lg ${
           message.type === 'success' 
             ? 'bg-emerald-50 border-emerald-200 text-emerald-800' 
             : 'bg-rose-50 border-rose-200 text-rose-800'
